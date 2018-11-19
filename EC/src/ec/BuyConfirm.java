@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import beans.BuyDataBeans;
 import beans.DeliveryMethodDataBeans;
 import beans.ItemDataBeans;
-import dao.BuyDAO;
 import dao.DeliveryMethodDAO;
 
 /**
@@ -43,9 +42,9 @@ public class BuyConfirm extends HttpServlet {
 			bdb.setDelivertMethodId(userSelectDMB.getId());
 
 			//購入確定で利用
-			BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(inputDeliveryMethodId);
-			session.setAttribute("bdb", resultBDB);
+			session.setAttribute("bdb", bdb);
 			request.getRequestDispatcher(EcHelper.BUY_CONFIRM_PAGE).forward(request, response);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());
