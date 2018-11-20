@@ -47,9 +47,8 @@
 									<tr>
 										<td class="center"></td>
 										<td class="center">合計</td>
-										<td class="center">${bdb.deliveryMethodName + bdb.totalPrice}円</td>
+										<td class="center">${bdb.totalPrice}円</td>
 									</tr>
-
 								</tbody>
 							</table>
 						</div>

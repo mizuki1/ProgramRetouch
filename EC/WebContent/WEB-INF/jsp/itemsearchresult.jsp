@@ -73,7 +73,7 @@
 					<li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
 				</c:when>
 				<c:otherwise>
-					<li class="waves-effect"><a href="ItemSearchResult?search_word=${searchWord}&page_num=${pageNum + 1}"><i class="material-icons">chevron_right</i></a></li>
+					<li class="waves-effect"><a href="ItemSearchResult?search_word=${searchWord}&page_num=${pageNum +1 }"><i class="material-icons">chevron_right</i></a></li>
 				</c:otherwise>
 				</c:choose>
 			</ul>
