@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import base.DBManager;
+import beans.BuyDataBeans;
 import beans.BuyDetailDataBeans;
 import beans.ItemDataBeans;
 
@@ -130,5 +131,37 @@ public class BuyDetailDAO {
 			}
 		}
 	}
+	public static ArrayList<BuyDataBeans> getBuyDataBeansListByBuyUserId(int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
 
+			st = con.prepareStatement("select * from t_buy where user_id =?");
+			st.setInt(1,userId);
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<BuyDataBeans> buyUserList = new ArrayList<BuyDataBeans>();
+
+			while (rs.next()) {
+				BuyDataBeans bdd = new BuyDataBeans();
+				bdd.setUserId(rs.getInt("user_Id"));
+				bdd.setBuyDate(rs.getTimestamp("create_date"));
+				bdd.setTotalPrice(rs.getInt("total_price"));
+				bdd.setDelivertMethodId(rs.getInt("id"));
+
+				buyUserList.add(bdd);
+			}
+
+			System.out.println("searching BuyDataBeansList by ID has been completed");
+			return buyUserList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
 }
