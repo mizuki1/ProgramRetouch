@@ -1,6 +1,8 @@
 package ec;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import beans.BuyDataBeans;
+import dao.BuyDetailDAO;
 
 /**
  * 購入履歴画面
@@ -23,23 +28,18 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
 
 		HttpSession session = request.getSession();
-//
-//		try {
-//);
-//
-//			BuyDataBeans bdb = new BuyDataBeans();
-//			bdb.setDeliveryMethodName(deliveryMethodName);
-//			bdb.setBuyDate(formatDate);
-//			bdb.setTotalPrice(totalPrice);
-//
-//		BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(buyId);
-//		request.setAttribute("resultBDB", resultBDB);
-//
-//				ArrayList<ItemDataBeans> buyIDBList = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
-//		request.setAttribute("buyIDBList", buyIDBList);
-//
-//		} catch (SQLException e) {
-//		e.printStackTrace();
-//		}
+ try {
+		int userId = (int) session.getAttribute("userId");
+		//int buyId = (int)session.getAttribute("buyId");
+
+			ArrayList<BuyDataBeans> UserData = BuyDetailDAO.getBuyDataBeansListByBuyUserId(userId);
+			request.setAttribute("userData", UserData);
+
+			//ArrayList<ItemDataBeans> UserbuyHi = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
+			//request.setAttribute("userbuyHi", UserbuyHi);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

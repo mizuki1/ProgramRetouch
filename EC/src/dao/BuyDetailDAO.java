@@ -116,7 +116,6 @@ public class BuyDetailDAO {
 				idb.setName(rs.getString("name"));
 				idb.setPrice(rs.getInt("price"));
 
-
 				buyDetailItemList.add(idb);
 			}
 
@@ -137,18 +136,22 @@ public class BuyDetailDAO {
 		try {
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("select * from t_buy where user_id =?");
+			st = con.prepareStatement("SELECT * FROM t_buy"
+												+ " JOIN m_delivery_method"
+												+ " ON t_buy.delivery_method_id = m_delivery_method.id"
+												+ " WHERE t_buy.user_id = ?");
 			st.setInt(1,userId);
 
 			ResultSet rs = st.executeQuery();
 			ArrayList<BuyDataBeans> buyUserList = new ArrayList<BuyDataBeans>();
 
 			while (rs.next()) {
+
 				BuyDataBeans bdd = new BuyDataBeans();
-				bdd.setUserId(rs.getInt("user_Id"));
+				bdd.setUserId(rs.getInt("user_id"));
 				bdd.setBuyDate(rs.getTimestamp("create_date"));
-				bdd.setTotalPrice(rs.getInt("total_price"));
-				bdd.setDelivertMethodId(rs.getInt("id"));
+				bdd.setTotalPrice(rs.getInt("total_Price"));
+				bdd.setDeliveryMethodName(rs.getString("name"));
 
 				buyUserList.add(bdd);
 			}

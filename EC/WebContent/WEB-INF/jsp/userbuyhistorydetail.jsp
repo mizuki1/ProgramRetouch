@@ -1,4 +1,6 @@
 <%@	page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,9 +31,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">${bdb.formatDate}</td>
-									<td class="center">${bdb.deliveryMethodName}</td>
-									<td class="center">${bdb.totalPrice}円</td>
+									<td class="center">${userData.formatDate}</td>
+									<td class="center">${userData.deliveryMethodName}</td>
+									<td class="center">${userData.totalPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -52,10 +54,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="resultBDB" items="${resultBDBList}" >
+								<c:forEach var="userbuy" items="${userbuyHi}" >
 								<tr>
-										<td class="center">${resultBDB.name}</td>
-										<td class="center">${resultBDB.price}円</td>
+										<td class="center">${userbuy.name}</td>
+										<td class="center">${userbuy.price}円</td>
 								</tr>
 									</c:forEach>
 
