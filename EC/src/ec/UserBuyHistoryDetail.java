@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.BuyDataBeans;
+import beans.ItemDataBeans;
 import dao.BuyDetailDAO;
 
 /**
@@ -28,18 +28,17 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
 
 		HttpSession session = request.getSession();
- try {
-		int userId = (int) session.getAttribute("userId");
-		//int buyId = (int)session.getAttribute("buyId");
 
-			ArrayList<BuyDataBeans> UserData = BuyDetailDAO.getBuyDataBeansListByBuyUserId(userId);
-			request.setAttribute("userData", UserData);
+	try {
 
-			//ArrayList<ItemDataBeans> UserbuyHi = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
-			//request.setAttribute("userbuyHi", UserbuyHi);
+		int buyId = (int)session.getAttribute("buyId");
+		ArrayList<ItemDataBeans> buyIDBList = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
+		request.setAttribute("buyIDBList", buyIDBList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+
 	}
 }

@@ -31,9 +31,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">${userData.formatDate}</td>
-									<td class="center">${userData.deliveryMethodName}</td>
-									<td class="center">${userData.totalPrice}円</td>
+									<td class="center">${buyIDBList.formatDate}</td>
+									<td class="center">${buyIDBList.deliveryMethodName}</td>
+									<td class="center">${buyIDBList.totalPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -54,13 +54,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="userbuy" items="${userbuyHi}" >
 								<tr>
-										<td class="center">${userbuy.name}</td>
-										<td class="center">${userbuy.price}円</td>
+										<td class="center">${buyIDBList.name}</td>
+										<td class="center">${buyIDBList.price}円</td>
 								</tr>
-									</c:forEach>
-
 							</tbody>
 						</table>
 					</div>
