@@ -21,6 +21,7 @@
 			<div class="col s10 offset-s1">
 				<div class="card grey lighten-5">
 					<div class="card-content">
+					  <form action="UserBuyHistoryDetail" >
 						<table>
 							<thead>
 								<tr>
@@ -31,9 +32,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">${buyIDBList.formatDate}</td>
-									<td class="center">${buyIDBList.deliveryMethodName}</td>
-									<td class="center">${buyIDBList.totalPrice}円</td>
+									<td class="center">${userData.formatDate}</td>
+									<td class="center">${userData.deliveryMethodName}</td>
+									<td class="center">${userData.totalPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -54,12 +55,17 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach var="buy" items="${buyID}">
 								<tr>
-										<td class="center">${buyIDBList.name}</td>
-										<td class="center">${buyIDBList.price}円</td>
+										<td class="center">${buy.name}</td>
+										<td class="center">${buy.price}円</td>
 								</tr>
+								</c:forEach>
+								<td class="center">${userData.deliveryMethodName}</td>
+								<td class="center">${userData.deliveryMethodprice}</td>
 							</tbody>
 						</table>
+					  </form>
 					</div>
 				</div>
 			</div>

@@ -130,7 +130,8 @@ public class BuyDetailDAO {
 			}
 		}
 	}
-	public static ArrayList<BuyDataBeans> getBuyDataBeansListByBuyUserId(int userId) throws SQLException {
+
+	public static ArrayList<BuyDataBeans> getBuyDataBeansListBuyId(int buyId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -140,7 +141,7 @@ public class BuyDetailDAO {
 												+ " JOIN m_delivery_method"
 												+ " ON t_buy.delivery_method_id = m_delivery_method.id"
 												+ " WHERE t_buy.user_id = ?");
-			st.setInt(1,userId);
+			st.setInt(1,buyId);
 
 			ResultSet rs = st.executeQuery();
 			ArrayList<BuyDataBeans> buyUserList = new ArrayList<BuyDataBeans>();
@@ -148,10 +149,12 @@ public class BuyDetailDAO {
 			while (rs.next()) {
 
 				BuyDataBeans bdd = new BuyDataBeans();
+				bdd.setId(rs.getInt("id"));
 				bdd.setUserId(rs.getInt("user_id"));
 				bdd.setBuyDate(rs.getTimestamp("create_date"));
 				bdd.setTotalPrice(rs.getInt("total_Price"));
 				bdd.setDeliveryMethodName(rs.getString("name"));
+				bdd.setDeliveryMethodPrice(rs.getInt("price"));
 
 				buyUserList.add(bdd);
 			}
@@ -167,4 +170,45 @@ public class BuyDetailDAO {
 			}
 		}
 	}
+
+
+		public static ArrayList<BuyDataBeans> getBuyDataBeansListByBuyUserId(int userId) throws SQLException {
+			Connection con = null;
+			PreparedStatement st = null;
+			try {
+				con = DBManager.getConnection();
+
+				st = con.prepareStatement("SELECT * FROM t_buy"
+													+ " JOIN m_delivery_method"
+													+ " ON t_buy.delivery_method_id = m_delivery_method.id"
+													+ " WHERE t_buy.user_id = ?");
+				st.setInt(1,userId);
+
+				ResultSet rs = st.executeQuery();
+				ArrayList<BuyDataBeans> buyUserList = new ArrayList<BuyDataBeans>();
+
+				while (rs.next()) {
+
+					BuyDataBeans bdd = new BuyDataBeans();
+					bdd.setId(rs.getInt("id"));
+					bdd.setUserId(rs.getInt("user_id"));
+					bdd.setBuyDate(rs.getTimestamp("create_date"));
+					bdd.setTotalPrice(rs.getInt("total_Price"));
+					bdd.setDeliveryMethodName(rs.getString("name"));
+
+					buyUserList.add(bdd);
+				}
+
+				System.out.println("searching BuyDataBeansList by ID has been completed");
+				return buyUserList;
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				throw new SQLException(e);
+			} finally {
+				if (con != null) {
+					con.close();
+				}
+			}
+	}
+
 }

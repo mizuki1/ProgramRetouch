@@ -1,7 +1,6 @@
 package ec;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -25,20 +24,28 @@ public class UserBuyHistoryDetail extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
+
 
 		HttpSession session = request.getSession();
 
 	try {
 
-		int buyId = (int)session.getAttribute("buyId");
-		ArrayList<ItemDataBeans> buyIDBList = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
-		request.setAttribute("buyIDBList", buyIDBList);
+		String buyid = request.getParameter("buy_id");
+		int num = Integer.parseInt(buyid);
+		request.setAttribute("num", num);
 
-		} catch (SQLException e) {
+		BuyDetailDAO buydetailDAO = new BuyDetailDAO();
+		ArrayList<ItemDataBeans> buyID  = buydetailDAO.getItemDataBeansListByBuyId(num);
+	    request.setAttribute("buyID", buyID);
+
+
+//	    ArrayList<BuyDataBeans> UserData = BuyDetailDAO.getBuyDataBeansListBuyId(num);
+//	   	request.setAttribute("userData", UserData);
+
+	    request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
 	}
 }
