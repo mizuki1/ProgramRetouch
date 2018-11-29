@@ -13,6 +13,7 @@ public class ItemDataBeans implements Serializable {
 	private String detail;
 	private int price;
 	private String fileName;
+	private int buyid;
 
 
 	public int getId() {
@@ -45,8 +46,10 @@ public class ItemDataBeans implements Serializable {
 	public void setFileName(String filename) {
 		this.fileName = filename;
 	}
-
-
-
-
+	public int getBuyid() {
+		return buyid;
+	}
+	public void setBuyid(int buyid) {
+		this.buyid = buyid;
+	}
 }

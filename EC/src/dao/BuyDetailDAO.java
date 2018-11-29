@@ -104,7 +104,7 @@ public class BuyDetailDAO {
 					+ " FROM t_buy_detail"
 					+ " JOIN m_item"
 					+ " ON t_buy_detail.item_id = m_item.id"
-					+ " WHERE t_buy_detail.buy_id = ?");
+					+ " WHERE t_buy_detail.buy_id = ?" );
 			st.setInt(1, buyId);
 
 			ResultSet rs = st.executeQuery();
@@ -140,7 +140,7 @@ public class BuyDetailDAO {
 			st = con.prepareStatement("SELECT * FROM t_buy"
 												+ " JOIN m_delivery_method"
 												+ " ON t_buy.delivery_method_id = m_delivery_method.id"
-												+ " WHERE t_buy.user_id = ?");
+												+ " WHERE t_buy.id = ?");
 			st.setInt(1,buyId);
 
 			ResultSet rs = st.executeQuery();
@@ -181,7 +181,7 @@ public class BuyDetailDAO {
 				st = con.prepareStatement("SELECT * FROM t_buy"
 													+ " JOIN m_delivery_method"
 													+ " ON t_buy.delivery_method_id = m_delivery_method.id"
-													+ " WHERE t_buy.user_id = ?");
+													+ " WHERE t_buy.user_id = ? ORDER BY create_date DESC");
 				st.setInt(1,userId);
 
 				ResultSet rs = st.executeQuery();

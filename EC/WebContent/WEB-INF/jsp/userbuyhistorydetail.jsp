@@ -32,9 +32,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">${userData.formatDate}</td>
-									<td class="center">${userData.deliveryMethodName}</td>
-									<td class="center">${userData.totalPrice}円</td>
+									<td class="center">${resultBDB.formatDate}</td>
+									<td class="center">${resultBDB.deliveryMethodName}</td>
+									<td class="center">${resultBDB.totalPrice}円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -61,8 +61,8 @@
 										<td class="center">${buy.price}円</td>
 								</tr>
 								</c:forEach>
-								<td class="center">${userData.deliveryMethodName}</td>
-								<td class="center">${userData.deliveryMethodprice}</td>
+								<td class="center">${resultBDB.deliveryMethodName}</td>
+								<td class="center">${resultBDB.deliveryMethodPrice}</td>
 							</tbody>
 						</table>
 					  </form>

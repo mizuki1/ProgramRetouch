@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyDataBeans;
 import beans.ItemDataBeans;
+import dao.BuyDAO;
 import dao.BuyDetailDAO;
 
 /**
@@ -24,8 +26,6 @@ public class UserBuyHistoryDetail extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
 		HttpSession session = request.getSession();
 
 	try {
@@ -38,9 +38,8 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		ArrayList<ItemDataBeans> buyID  = buydetailDAO.getItemDataBeansListByBuyId(num);
 	    request.setAttribute("buyID", buyID);
 
-
-//	    ArrayList<BuyDataBeans> UserData = BuyDetailDAO.getBuyDataBeansListBuyId(num);
-//	   	request.setAttribute("userData", UserData);
+		BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(num);
+		request.setAttribute("resultBDB", resultBDB);
 
 	    request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
 

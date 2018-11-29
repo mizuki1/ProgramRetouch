@@ -19,6 +19,7 @@ public class BuyDataBeans  implements Serializable {
 	private String formatDate;
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
+	private int buyid;
 
 	public int getId() {
 		return id;
@@ -70,5 +71,11 @@ public class BuyDataBeans  implements Serializable {
 	}
 	public void setDeliveryMethodPrice(int deliveryMethodPrice) {
 		this.deliveryMethodPrice = deliveryMethodPrice;
+	}
+	public int getBuyid() {
+		return buyid;
+	}
+	public void setBuyid(int buyid) {
+		this.buyid = buyid;
 	}
 }

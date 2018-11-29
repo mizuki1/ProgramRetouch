@@ -29,6 +29,7 @@ public class UserData extends HttpServlet {
 
 		// セッション開始
 		HttpSession session = request.getSession();
+		
 		try {
 			// ログイン時に取得したユーザーIDをセッションから取得
 
